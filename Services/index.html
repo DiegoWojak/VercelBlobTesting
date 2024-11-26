@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <input type="file" id="fileInput" />
+    <button onclick="uploadFile()">Upload</button>
+    <script>
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            const response = await fetch('https://api.vercel.com/v2/blob', {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer YOUR_ACCESS_TOKEN`,
+                },
+                body: file,
+            });
+            const data = await response.json();
+            console.log('Uploaded file URL:', data.url);
+        }
+    </script>
+</body>
+</html>
